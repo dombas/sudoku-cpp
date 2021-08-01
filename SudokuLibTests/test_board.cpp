@@ -3,7 +3,7 @@
 #include "test.h"
 
 // example test, Given...When...Then...
-TEST(SudokuBoardTest, GivenEmptyBoardWhenCheckingEachFieldThenEmptyIsReturned) {
+TEST(SudokuBoardTest, GivenEmptyBoardWhenCheckingFieldThenEmptyIsReturned) {
 	Board board;
 
 	for (int row = 0; row < 9; row++) {
