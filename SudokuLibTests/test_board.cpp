@@ -32,3 +32,12 @@ TEST(SudokuBoardTest, given_edited_board_when_setting_incorrect_value_then_excep
 	EXPECT_THROW(board.set_value_of_field(0, 0, 10), IncorrectFieldValueException);
 	EXPECT_THROW(board.set_value_of_field(0, 0, -1), IncorrectFieldValueException);
 }
+
+TEST(SudokuBoardTest, given_edited_board_when_setting_value_out_of_board_then_exception_is_thrown) {
+	Board board;
+
+	EXPECT_THROW(board.set_value_of_field(-1, 0, 1), IndexOutOfBoardException);
+	EXPECT_THROW(board.set_value_of_field(0, -1, 1), IndexOutOfBoardException);
+	EXPECT_THROW(board.set_value_of_field(9, 0, 1), IndexOutOfBoardException);
+	EXPECT_THROW(board.set_value_of_field(0, 9, 1), IndexOutOfBoardException);
+}

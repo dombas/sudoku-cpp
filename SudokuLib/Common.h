@@ -27,12 +27,10 @@ public:
 		field_value(field_value)
 	{}
 
-	virtual ~IncorrectFieldValueException() throw () {}
-
 	virtual const char* what() const throw () {
 		ostringstream string_stream;
 		string_stream << "Error: trying to assign incorrect value (" << +field_value
-			<< ") to row (" <<+row_index<<"), column ("<<+column_index<<")";
+			<< ") to row (" << +row_index << "), column (" << +column_index << ")";
 		return string_stream.str().c_str();;
 	}
 
@@ -46,5 +44,18 @@ public:
 
 	virtual int get_field_value() const throw() {
 		return field_value;
+	}
+};
+
+class IndexOutOfBoardException : public IncorrectFieldValueException {
+public:
+	IndexOutOfBoardException(board_index_datatype row_index, board_index_datatype column_index, field_datatype field_value) :
+		IncorrectFieldValueException(row_index, column_index, field_value)
+	{}
+	virtual const char* what() const throw () {
+		ostringstream string_stream;
+		string_stream << "Error: trying to assign value (" << +field_value
+			<< ") to out of board: row (" << +row_index << "), column (" << +column_index << ")";
+		return string_stream.str().c_str();;
 	}
 };
