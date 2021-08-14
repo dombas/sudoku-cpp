@@ -139,7 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SudokuConsoleUi.cpp" />
+    <ClCompile Include="ConsoleUi.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConsoleUi.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SudokuLib\SudokuLib.vcxproj">
+      <Project>{d9878988-d3c6-438f-852a-6caa10224e63}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

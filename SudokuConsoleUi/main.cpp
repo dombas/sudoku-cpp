@@ -1,11 +1,14 @@
 // SudokuConsoleUi.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
+#include "ConsoleUi.h"
+
+using namespace Sudoku;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	ConsoleUi game;
+	game.print_board();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
