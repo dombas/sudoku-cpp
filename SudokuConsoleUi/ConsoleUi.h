@@ -1,6 +1,11 @@
 #pragma once
 #include "../SudokuLib/Board.h"
 #include "SudokuCommand.h"
+#include <memory>
+
+using std::string;
+using std::unique_ptr;
+
 namespace Sudoku {
 
 	constexpr char column_delimiter = '|';
@@ -19,7 +24,7 @@ namespace Sudoku {
 		void clear_screen();
 		void print_message(string message);
 		string get_input();
-		SudokuCommand parse_input(string input);
+		unique_ptr<SudokuCommand> parse_input(string input);
 	public:
 		ConsoleUi();
 		void game_loop();
