@@ -2,6 +2,7 @@
 #include <iostream>
 
 using std::cout;
+using std::cin;
 using std::endl;
 using std::string;
 using std::to_string;
@@ -48,6 +49,31 @@ namespace Sudoku {
 		board.set_value_of_field(8, 8, 9);
 	}
 
+	void ConsoleUi::game_loop()
+	{ 
+		string message = "";
+		string input = "";
+		SudokuCommand command;
+		do {
+			clear_screen();
+
+			print_board();
+
+			print_message(message);
+
+			input = get_input();
+			
+			command = parse_input(input);
+
+			if (command.is_valid()) {
+				command.apply_to_board(board);
+			}
+			else {
+				message = command.get_message();
+			}
+		} while (1);
+	}
+
 	void ConsoleUi::print_board() {
 		for (board_index_datatype row = 0; row < 9; row++) {
 			if (row % 3 == 0 && row > 0) {
@@ -55,6 +81,34 @@ namespace Sudoku {
 			}
 			print_row(row);
 		}
+	}
+
+	void ConsoleUi::clear_screen()
+	{
+		// TODO: actually clear the screen
+		cout << endl << string(30, '=') << endl << endl;
+	}
+
+	void ConsoleUi::print_message(string message)
+	{
+		if (message.length() > 0) {
+			cout << endl << message << endl;
+		}
+	}
+
+	string ConsoleUi::get_input()
+	{
+		string input;
+		cout << "input:";
+		cin >> input;
+		return input;
+	}
+
+	SudokuCommand ConsoleUi::parse_input(string input)
+	{
+		SudokuCommand command;
+		command.set_message(input);
+		return command;
 	}
 
 } // Sudoku
