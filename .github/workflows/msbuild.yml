@@ -1,4 +1,4 @@
-name: MSBuild
+name: MSBuild and lib test
 
 on: [push]
 
