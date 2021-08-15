@@ -1,11 +1,12 @@
 #include "ConsoleUi.h"
 #include <iostream>
 
-using std::cout;
 using std::cin;
+using std::cout;
 using std::endl;
 using std::string;
 using std::to_string;
+using std::unique_ptr;
 
 namespace Sudoku {
 
@@ -52,8 +53,6 @@ namespace Sudoku {
 	void ConsoleUi::game_loop()
 	{ 
 		string message = "";
-		string input = "";
-		SudokuCommand command;
 		do {
 			clear_screen();
 
@@ -61,15 +60,15 @@ namespace Sudoku {
 
 			print_message(message);
 
-			input = get_input();
+			auto input = get_input();
 			
-			command = parse_input(input);
+			auto command = parse_input(input);
 
-			if (command.is_valid()) {
-				command.apply_to_board(board);
+			if (command->is_valid()) {
+				command->apply_to_board(board);
 			}
 			else {
-				message = command.get_message();
+				message = command->get_message();
 			}
 		} while (1);
 	}
@@ -104,11 +103,9 @@ namespace Sudoku {
 		return input;
 	}
 
-	SudokuCommand ConsoleUi::parse_input(string input)
+	unique_ptr<SudokuCommand> ConsoleUi::parse_input(string input)
 	{
-		SudokuCommand command;
-		command.set_message(input);
-		return command;
+		return unique_ptr<SudokuCommand>(new SudokuCommand(input));
 	}
 
 } // Sudoku
