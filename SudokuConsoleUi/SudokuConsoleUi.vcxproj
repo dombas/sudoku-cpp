@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="ConsoleUi.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SudokuCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleUi.h" />
+    <ClInclude Include="SudokuCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SudokuLib\SudokuLib.vcxproj">

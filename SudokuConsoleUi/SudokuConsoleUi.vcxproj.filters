@@ -21,9 +21,15 @@
     <ClCompile Include="ConsoleUi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SudokuCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleUi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SudokuCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "../SudokuLib/Board.h"
+#include "SudokuCommand.h"
 namespace Sudoku {
 
 	constexpr char column_delimiter = '|';
@@ -14,8 +15,13 @@ namespace Sudoku {
 		char get_field(board_index_datatype row, board_index_datatype column);
 		void print_row(board_index_datatype row, uint8_t horizontal_spacing = 1);
 		void print_delimiting_row(uint8_t horizontal_spacing = 1);
+		void print_board();
+		void clear_screen();
+		void print_message(string message);
+		string get_input();
+		SudokuCommand parse_input(string input);
 	public:
 		ConsoleUi();
-		void print_board();
+		void game_loop();
 	};
 } // Sudoku

@@ -8,7 +8,7 @@ using namespace Sudoku;
 int main()
 {
 	ConsoleUi game;
-	game.print_board();
+	game.game_loop();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
