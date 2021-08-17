@@ -1,5 +1,6 @@
 #include "Board.h"
 
+using std::copy;
 
 Board::Board()
 {
@@ -8,6 +9,11 @@ Board::Board()
 			board[row][column] = EMPTY_FIELD;
 		}
 	}
+}
+
+Board::Board(field_datatype board[9][9])
+{
+	copy(&board[0][0], &board[0][0] + 9 * 9, &this->board[0][0]);
 }
 
 field_datatype Board::get_value_of_field(board_index_datatype row, board_index_datatype column) {
