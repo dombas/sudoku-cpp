@@ -20,7 +20,48 @@ field_datatype Board::get_value_of_field(board_index_datatype row, board_index_d
 	return board[row][column];
 }
 
-void Board::set_value_of_field(board_index_datatype row, board_index_datatype column, field_datatype value)
+field_datatype *Board::get_col(board_index_datatype col) 
+{
+	static field_datatype board_col[9];
+
+	for (board_index_datatype row = 0; row < 9; row++)
+	{
+		board_col[row] = board[row][col];
+	}
+
+	return board_col;
+}
+
+field_datatype *Board::get_row(board_index_datatype row) 
+{
+	static field_datatype board_row[9];
+
+	for (board_index_datatype col = 0; col < 9; col++)
+	{
+		board_row[col] = board[row][col];
+	}
+
+	return board_row;
+}
+
+field_datatype *Board::get_square(board_index_datatype square_row, board_index_datatype square_col) 
+{
+	static field_datatype board_square[9];
+
+	int i = 0;
+	for (board_index_datatype row = square_row * 3; row < ((square_row * 3) + 3); row++)
+	{
+		for (board_index_datatype col = square_col * 3; col < ((square_col * 3) + 3); col++)
+		{
+			board_square[i] = board[row][col];
+			i++;
+		}
+	}
+
+	return board_square;
+}
+
+void Board::set_value_of_field(board_index_datatype row, board_index_datatype column, field_datatype value) 
 {
 	if (value < EMPTY_FIELD || value > 9) {
 		throw IncorrectFieldValueException(row, column, value);
