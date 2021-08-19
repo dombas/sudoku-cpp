@@ -6,6 +6,11 @@
 using std::string;
 
 namespace Sudoku {
+
+extern const string row_symbols;
+extern const string column_symbols;
+extern const string value_symbols;
+
 class SudokuCommand {
  protected:
   const string input;

@@ -17,26 +17,27 @@ char ConsoleUi::get_field(board_index_datatype row,
   return to_string(value).at(0);
 }
 
-void ConsoleUi::print_row(board_index_datatype row,
-                          uint8_t horizontal_spacing) {
+// TODO: refactor duplicated code with other print methods
+void ConsoleUi::print_sudoku_row(board_index_datatype row,
+                                 uint8_t horizontal_spacing) {
   for (board_index_datatype column = 0; column < 9; column++) {
     if (column % 3 == 0 && column > 0) {
       cout << column_delimiter;
     }
-    cout << string(horizontal_spacing, spacing_character)
-         << get_field(row, column)
-         << string(horizontal_spacing, spacing_character);
+    cout << spacing(horizontal_spacing) << get_field(row, column)
+         << spacing(horizontal_spacing);
   }
   cout << endl;
 }
 
 void ConsoleUi::print_delimiting_row(uint8_t horizontal_spacing) {
+  cout << spacing((horizontal_spacing * 2 + 1)*2); // TODO: refactor, define const "horizontal_header_padding"
   for (board_index_datatype column = 0; column < 9; column++) {
     if (column % 3 == 0 && column > 0) {
       cout << cross_delimiter;
     }
-    cout << string(horizontal_spacing * 2 + 1, row_delimiter);
-    ;
+    cout << string(horizontal_spacing * 2 + 1,
+                   row_delimiter);  // TODO: refactor with spacing()
   }
   cout << endl;
 }
@@ -75,17 +76,44 @@ void ConsoleUi::game_loop() {
 }
 
 void ConsoleUi::print_board() {
+  print_header_row();
   for (board_index_datatype row = 0; row < 9; row++) {
     if (row % 3 == 0 && row > 0) {
       print_delimiting_row();
     }
-    print_row(row);
+    print_header_before_row(row);
+    print_sudoku_row(row);
   }
+}
+
+void ConsoleUi::print_header_row(uint8_t horizontal_spacing) {
+  cout << spacing((horizontal_spacing * 2 + 1) * 2);
+  for (board_index_datatype column = 0; column < 9; column++) {
+    if (column % 3 == 0 && column > 0) {
+      cout << spacing(horizontal_spacing);
+    }
+    char character = column_symbols[column];
+    cout << spacing(horizontal_spacing) << character
+         << spacing(horizontal_spacing);
+  }
+  cout << endl;
+  cout << endl;
+}
+
+void ConsoleUi::print_header_before_row(board_index_datatype row,
+                                        uint8_t horizontal_spacing) {
+  cout << spacing(horizontal_spacing) << row_symbols[row]
+       << spacing(horizontal_spacing);
+  cout << spacing(horizontal_spacing * 2+1);
+}
+
+string ConsoleUi::spacing(uint8_t horizontal_spacing) {
+  return string(horizontal_spacing, spacing_character);
 }
 
 void ConsoleUi::clear_screen() {
   // TODO: actually clear the screen
-  cout << endl << string(30, '=') << endl << endl;
+  cout << endl << string(50, '=') << endl << endl;
 }
 
 void ConsoleUi::print_message(string message) {

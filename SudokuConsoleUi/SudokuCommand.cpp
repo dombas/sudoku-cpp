@@ -5,11 +5,12 @@ using std::string;
 using std::to_string;
 
 namespace Sudoku {
-void SudokuCommand::parse_input() {
-  const string row_symbols    = "abcdefghi";
-  const string column_symbols = "123456789";
-  const string value_symbols  = "123456789";
 
+const string row_symbols    = "abcdefghi";
+const string column_symbols = "123456789";
+const string value_symbols  = "123456789";
+
+void SudokuCommand::parse_input() {
   enum class ParseState { no_row, no_column, no_value, all_found };
   ParseState state = ParseState::no_row;
 

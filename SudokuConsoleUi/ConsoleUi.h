@@ -18,9 +18,14 @@ class ConsoleUi {
  protected:
   Board board;
   char get_field(board_index_datatype row, board_index_datatype column);
-  void print_row(board_index_datatype row, uint8_t horizontal_spacing = 1);
+  void print_sudoku_row(board_index_datatype row,
+                        uint8_t horizontal_spacing = 1);
   void print_delimiting_row(uint8_t horizontal_spacing = 1);
+  void print_header_row(uint8_t horizontal_spacing = 1);
   void print_board();
+  void print_header_before_row(board_index_datatype row,
+                               uint8_t horizontal_spacing = 1);
+  string spacing(uint8_t horizontal_spacing = 1);
   void clear_screen();
   void print_message(string message);
   string get_input();
