@@ -10,6 +10,18 @@ Board::Board() {
   }
 }
 
+Board::Board(string &field_string) {
+  field_datatype input_field[9][9];
+  unsigned i_num = 0;
+  for (int i_elem = 0; i_elem < field_string.size(); i_elem++) {
+    if (isdigit(field_string[i_elem])) {
+      input_field[i_num / 9][i_num % 9] = field_string[i_elem] - '0';
+      i_num++;
+    }
+  }
+  copy(&input_field[0][0], &input_field[0][0] + 9 * 9, &this->board[0][0]);
+}
+
 Board::Board(field_datatype board[9][9]) {
   copy(&board[0][0], &board[0][0] + 9 * 9, &this->board[0][0]);
 }
@@ -54,6 +66,17 @@ field_datatype *Board::get_square(board_index_datatype square_row,
   }
 
   return board_square;
+}
+
+string Board::get_string() {
+  char data[9 * 9 + 1];
+  for (board_index_datatype row = 0; row < 9; row++) {
+    for (board_index_datatype column = 0; column < 9; column++) {
+      data[row * 9 + column] = (char)(this->board[row][column] + '0');
+    }
+  }
+  data[81] = '\0';
+  return std::string(data);
 }
 
 void Board::set_value_of_field(board_index_datatype row,
