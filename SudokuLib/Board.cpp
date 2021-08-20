@@ -10,6 +10,18 @@ Board::Board() {
   }
 }
 
+Board::Board(string &field_string) {
+  field_datatype input_field[9][9];
+  unsigned i_num = 0;
+  for (int i_elem = 0; i_elem < field_string.size(); i_elem++) {
+    if (isdigit(field_string[i_elem])) {
+      input_field[i_num / 9][i_num % 9] = field_string[i_elem] - '0';
+      i_num++;
+    }
+  }
+  copy(&input_field[0][0], &input_field[0][0] + 9 * 9, &this->board[0][0]);
+}
+
 Board::Board(field_datatype board[9][9]) {
   copy(&board[0][0], &board[0][0] + 9 * 9, &this->board[0][0]);
 }

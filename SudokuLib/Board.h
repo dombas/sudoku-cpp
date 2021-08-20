@@ -7,6 +7,7 @@ class Board {
  public:
   Board();
   Board(field_datatype board[9][9]);
+  Board(string &field_string);
   field_datatype get_value_of_field(board_index_datatype row,
                                     board_index_datatype column);
   field_datatype *get_row(board_index_datatype row);
