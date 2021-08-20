@@ -16,6 +16,106 @@ TEST(SudokuBoardTest,
 
 TEST(
     SudokuBoardTest,
+    given_string_constructor_when_checking_fields_then_correct_values_are_returned) {
+  string board_string =
+      "1,2,3,4,5,6,7,8,9, "   //
+      "2,3,4,5,6,7,8,9,1, "   //
+      "3 4 5 6 7 8 9 1 2  "   //
+      "4 5 6 7 8 9 1 2 3  "   //
+      "5-6-7-8-9-1-2-3-4- "   //
+      "6-7-8-9-1-2-3-4-5- "   //
+      "7;8;9;1;2;3;4;5;6; "   //
+      "8;9;1;2;3,4;5;6;7; "   //
+      "9:1:2:3:4:5:6:7:8: ";  //
+  Board board(board_string);
+  EXPECT_EQ(board.get_value_of_field(0, 0), 1);
+  EXPECT_EQ(board.get_value_of_field(0, 8), 9);
+  EXPECT_EQ(board.get_value_of_field(8, 0), 9);
+  EXPECT_EQ(board.get_value_of_field(8, 8), 8);
+  EXPECT_EQ(board.get_value_of_field(5, 6), 3);
+  EXPECT_EQ(board.get_value_of_field(4, 1), 6);
+}
+
+TEST(
+    SudokuBoardTest,
+    given_string_constructor_when_checking_row_then_correct_values_are_returned) {
+  string board_string =
+      "1,2,3,4,5,6,7,8,9, "   //
+      "2,3,4,5,6,7,8,9,1, "   //
+      "3 4 5 6 7 8 9 1 2  "   //
+      "4 5 6 7 8 9 1 2 3  "   //
+      "5-6-7-8-9-1-2-3-4- "   //
+      "6-7-8-9-1-2-3-4-5- "   //
+      "7;8;9;1;2;3;4;5;6; "   //
+      "8;9;1;2;3,4;5;6;7; "   //
+      "9:1:2:3:4:5:6:7:8: ";  //
+  Board board(board_string);
+
+  EXPECT_EQ(board.get_row(1)[0], 2);
+  EXPECT_EQ(board.get_row(1)[1], 3);
+  EXPECT_EQ(board.get_row(1)[2], 4);
+  EXPECT_EQ(board.get_row(1)[3], 5);
+  EXPECT_EQ(board.get_row(1)[4], 6);
+  EXPECT_EQ(board.get_row(1)[5], 7);
+  EXPECT_EQ(board.get_row(1)[6], 8);
+  EXPECT_EQ(board.get_row(1)[7], 9);
+  EXPECT_EQ(board.get_row(1)[8], 1);
+}
+
+TEST(
+    SudokuBoardTest,
+    given_string_constructor_when_checking_col_then_correct_values_are_returned) {
+  string board_string =
+      "1,2,3,4,5,6,7,8,9, "   //
+      "2,3,4,5,6,7,8,9,1, "   //
+      "3 4 5 6 7 8 9 1 2  "   //
+      "4 5 6 7 8 9 1 2 3  "   //
+      "5-6-7-8-9-1-2-3-4- "   //
+      "6-7-8-9-1-2-3-4-5- "   //
+      "7;8;9;1;2;3;4;5;6; "   //
+      "8;9;1;2;3,4;5;6;7; "   //
+      "9:1:2:3:4:5:6:7:8: ";  //
+  Board board(board_string);
+
+  EXPECT_EQ(board.get_col(2)[0], 3);
+  EXPECT_EQ(board.get_col(2)[1], 4);
+  EXPECT_EQ(board.get_col(2)[2], 5);
+  EXPECT_EQ(board.get_col(2)[3], 6);
+  EXPECT_EQ(board.get_col(2)[4], 7);
+  EXPECT_EQ(board.get_col(2)[5], 8);
+  EXPECT_EQ(board.get_col(2)[6], 9);
+  EXPECT_EQ(board.get_col(2)[7], 1);
+  EXPECT_EQ(board.get_col(2)[8], 2);
+}
+
+TEST(
+    SudokuBoardTest,
+    given_string_constructor_when_checking_square_then_correct_values_are_returned) {
+  string board_string =
+      "1,2,3,4,5,6,7,8,9, "   //
+      "2,3,4,5,6,7,8,9,1, "   //
+      "3 4 5 6 7 8 9 1 2  "   //
+      "4 5 6 7 8 9 1 2 3  "   //
+      "5-6-7-8-9-1-2-3-4- "   //
+      "6-7-8-9-1-2-3-4-5- "   //
+      "7;8;9;1;2;3;4;5;6; "   //
+      "8;9;1;2;3,4;5;6;7; "   //
+      "9:1:2:3:4:5:6:7:8: ";  //
+  Board board(board_string);
+
+  EXPECT_EQ(board.get_square(2, 2)[0], 4);
+  EXPECT_EQ(board.get_square(2, 2)[1], 5);
+  EXPECT_EQ(board.get_square(2, 2)[2], 6);
+  EXPECT_EQ(board.get_square(2, 2)[3], 5);
+  EXPECT_EQ(board.get_square(2, 2)[4], 6);
+  EXPECT_EQ(board.get_square(2, 2)[5], 7);
+  EXPECT_EQ(board.get_square(2, 2)[6], 6);
+  EXPECT_EQ(board.get_square(2, 2)[7], 7);
+  EXPECT_EQ(board.get_square(2, 2)[8], 8);
+}
+
+TEST(
+    SudokuBoardTest,
     given_array_constructor_when_checking_fields_then_correct_values_are_returned) {
   field_datatype board_values[9][9] = {
       {1, 2, 3, 4, 5, 6, 7, 8, 9},  //
