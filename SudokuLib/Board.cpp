@@ -68,6 +68,17 @@ field_datatype *Board::get_square(board_index_datatype square_row,
   return board_square;
 }
 
+string Board::get_string() {
+  char data[9 * 9 + 1];
+  for (board_index_datatype row = 0; row < 9; row++) {
+    for (board_index_datatype column = 0; column < 9; column++) {
+      data[row * 9 + column] = (char)(this->board[row][column] + '0');
+    }
+  }
+  data[81] = '\0';
+  return std::string(data);
+}
+
 void Board::set_value_of_field(board_index_datatype row,
                                board_index_datatype column,
                                field_datatype value) {
