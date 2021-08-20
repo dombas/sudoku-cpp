@@ -1,6 +1,10 @@
 name: MSBuild and lib test
 
-on: [push]
+on: 
+  push:
+  pull_request:
+    branches:
+      - master
 
 env:
   # Configuration type to build.
