@@ -147,3 +147,25 @@ TEST(
   EXPECT_THROW(board.set_value_of_field(9, 0, 1), IndexOutOfBoardException);
   EXPECT_THROW(board.set_value_of_field(0, 9, 1), IndexOutOfBoardException);
 }
+
+TEST(SudokuBoardTest, given_array_constructor_when_checking_group_is_valid) {
+  field_datatype board_values[9][9] = {
+      {1, 2, 3, 4, 5, 6, 7, 8, 9},  //
+      {2, 3, 4, 5, 6, 7, 8, 9, 1},  //
+      {3, 4, 5, 6, 7, 8, 9, 1, 2},  //
+      {0, 5, 6, 7, 8, 9, 1, 2, 3},  //
+      {5, 6, 7, 8, 9, 1, 2, 3, 4},  //
+      {6, 7, 8, 9, 1, 2, 3, 4, 5},  //
+      {7, 8, 9, 1, 2, 3, 4, 5, 6},  //
+      {0, 9, 1, 2, 3, 4, 5, 6, 7},  //
+      {9, 1, 2, 3, 4, 5, 6, 7, 8},  //
+  };
+  Board board(board_values);
+  field_datatype* col    = board.get_col(0);
+  field_datatype* row    = board.get_row(0);
+  field_datatype* square = board.get_square(0, 0);
+
+  EXPECT_EQ(board.is_valid_group(col), true);
+  EXPECT_EQ(board.is_valid_group(row), true);
+  EXPECT_EQ(board.is_valid_group(square), false);
+}

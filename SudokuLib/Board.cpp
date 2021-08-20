@@ -67,3 +67,19 @@ void Board::set_value_of_field(board_index_datatype row,
   }
   board[row][column] = value;
 }
+
+bool Board::is_valid_group(field_datatype *board_data) {
+  bool check[10] = {false};
+
+  for (int i = 0; i < 9; i++) {
+    if (board_data[i] != EMPTY_FIELD) {
+      if (check[board_data[i]] == true) {
+        return false;
+      } else {
+        check[board_data[i]] = true;
+      }
+    }
+  }
+
+  return true;
+}
