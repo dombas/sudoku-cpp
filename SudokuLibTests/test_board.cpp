@@ -214,6 +214,50 @@ TEST(SudokuBoardTest,
   EXPECT_EQ(board.get_square(2, 2)[7], 7);
   EXPECT_EQ(board.get_square(2, 2)[8], 8);
 }
+
+TEST(SudokuBoardTest,
+     given_empty_board_when_retrieving_string_then_correct_string_returned) {
+  string board_string =
+      "000000000"
+      "000000000"
+      "000000000"
+      "000000000"
+      "000000000"
+      "000000000"
+      "000000000"
+      "000000000"
+      "000000000";  //
+  Board board;
+  EXPECT_EQ(board_string.compare(board.get_string()), 0);
+}
+
+TEST(SudokuBoardTest,
+    given_filled_board_when_retrieving_string_then_correct_string_is_returned) {
+  string board_string =
+      "123456789"
+      "234567891"
+      "345678912"
+      "456789123"
+      "567891234"
+      "678912345"
+      "789123456"
+      "891234567"
+      "912345678";
+  field_datatype board_values[9][9] = {
+      {1, 2, 3, 4, 5, 6, 7, 8, 9},  //
+      {2, 3, 4, 5, 6, 7, 8, 9, 1},  //
+      {3, 4, 5, 6, 7, 8, 9, 1, 2},  //
+      {4, 5, 6, 7, 8, 9, 1, 2, 3},  //
+      {5, 6, 7, 8, 9, 1, 2, 3, 4},  //
+      {6, 7, 8, 9, 1, 2, 3, 4, 5},  //
+      {7, 8, 9, 1, 2, 3, 4, 5, 6},  //
+      {8, 9, 1, 2, 3, 4, 5, 6, 7},  //
+      {9, 1, 2, 3, 4, 5, 6, 7, 8},  //
+  };
+  Board board(board_values);
+  EXPECT_EQ(board_string.compare(board.get_string()), 0);
+}
+
 TEST(SudokuBoardTest,
      given_edited_board_when_checking_fields_then_correct_values_are_returned) {
   Board board;
