@@ -15,4 +15,5 @@ class Board {
                              board_index_datatype square_col);
   void set_value_of_field(board_index_datatype row, board_index_datatype column,
                           field_datatype value);
+  bool is_valid_group(field_datatype *board_data);
 };
