@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="Solver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Solver.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
