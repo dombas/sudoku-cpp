@@ -106,3 +106,14 @@ bool Board::is_valid_group(field_datatype *board_data) {
 
   return true;
 }
+
+bool Board::has_empty_fields() {
+  for (board_index_datatype row = 0; row < 9; row++) {
+    for (board_index_datatype column = 0; column < 9; column++) {
+      if (board[row][column] == EMPTY_FIELD) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
