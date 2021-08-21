@@ -31,7 +31,7 @@ TEST(SudokuSolverTest,
   Board board_solved   = solver.solve(board_input);
   string string_solved = board_solved.get_string();
   string string_target = board_target.get_string();
-  EXPECT_EQ(string_target.compare(string_solved), 0);
+  EXPECT_EQ(string_solved, string_target);
 }
 
 TEST(SudokuSolverTest,
@@ -39,8 +39,8 @@ TEST(SudokuSolverTest,
   Solver solver;
   Board board_input    = Board();
   Board board_solved   = solver.solve(board_input);
-  string solved_string = board_solved.get_string();
-  string target_string =
+  string string_solved = board_solved.get_string();
+  string string_target =
       "123456789"
       "456789123"
       "789123456"
@@ -50,5 +50,13 @@ TEST(SudokuSolverTest,
       "531642978"
       "642978531"
       "978531642";
-  EXPECT_EQ(target_string.compare(solved_string), 0);
+  EXPECT_EQ(string_solved, string_target);
+}
+
+TEST(SudokuSolverTest,
+     given_empty_board_when_solving_board_then_original_board_is_not_modified) {
+  Solver solver;
+  Board board_input    = Board();
+  Board board_solved   = solver.solve(board_input);
+  EXPECT_EQ(board_input.get_string(), Board().get_string());
 }
