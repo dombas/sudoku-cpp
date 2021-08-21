@@ -313,3 +313,37 @@ TEST(SudokuBoardTest, given_array_constructor_when_checking_group_is_valid) {
   EXPECT_EQ(board.is_valid_group(row), true);
   EXPECT_EQ(board.is_valid_group(square), false);
 }
+
+TEST(SudokuBoardTest,
+     given_unsolved_board_when_checking_then_has_empty_fields) {
+  field_datatype board_values[9][9] = {
+      {1, 2, 3, 4, 5, 6, 0, 8, 9},  //
+      {2, 3, 0, 5, 0, 7, 8, 0, 1},  //
+      {3, 0, 5, 6, 7, 8, 9, 1, 2},  //
+      {0, 5, 6, 7, 0, 9, 1, 2, 3},  //
+      {5, 6, 7, 8, 9, 1, 2, 3, 4},  //
+      {6, 7, 8, 9, 0, 2, 3, 4, 5},  //
+      {7, 8, 9, 1, 2, 0, 4, 5, 6},  //
+      {0, 9, 1, 2, 3, 4, 5, 6, 7},  //
+      {9, 1, 2, 3, 4, 5, 6, 7, 8},  //
+  };
+  Board board(board_values);
+  EXPECT_EQ(board.has_empty_fields(), true);
+}
+
+TEST(SudokuBoardTest,
+     given_solved_board_when_checking_then_has_no_empty_fields) {
+  field_datatype board_values[9][9] = {
+      {1, 2, 3, 4, 5, 6, 7, 8, 9},  //
+      {2, 3, 4, 5, 6, 7, 8, 9, 1},  //
+      {3, 4, 5, 6, 7, 8, 9, 1, 2},  //
+      {4, 5, 6, 7, 8, 9, 1, 2, 3},  //
+      {5, 6, 7, 8, 9, 1, 2, 3, 4},  //
+      {6, 7, 8, 9, 1, 2, 3, 4, 5},  //
+      {7, 8, 9, 1, 2, 3, 4, 5, 6},  //
+      {8, 9, 1, 2, 3, 4, 5, 6, 7},  //
+      {9, 1, 2, 3, 4, 5, 6, 7, 8},  //
+  };
+  Board board(board_values);
+  EXPECT_EQ(board.has_empty_fields(), false);
+}
