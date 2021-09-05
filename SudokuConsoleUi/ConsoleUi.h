@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "../SudokuLib/Board.h"
+#include "../SudokuLib/Solver.h"
 #include "SudokuCommand.h"
 
 using std::string;
@@ -56,5 +57,8 @@ class ConsoleUi {
  public:
   ConsoleUi();
   void game_loop();
+  void set_value_of_field(board_index_datatype row, board_index_datatype column,
+                          field_datatype value);
+  void solve();
 };
 }  // namespace Sudoku

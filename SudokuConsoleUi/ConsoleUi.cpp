@@ -85,17 +85,19 @@ void ConsoleUi::write_delimiting_columns() {
   }
 }
 
-ConsoleUi::ConsoleUi() {
-  clear_frame_buffer();
-  board.set_value_of_field(0, 0, 1);
-  board.set_value_of_field(1, 1, 2);
-  board.set_value_of_field(2, 2, 3);
-  board.set_value_of_field(3, 3, 4);
-  board.set_value_of_field(4, 4, 5);
-  board.set_value_of_field(5, 5, 6);
-  board.set_value_of_field(6, 6, 7);
-  board.set_value_of_field(7, 7, 8);
-  board.set_value_of_field(8, 8, 9);
+ConsoleUi::ConsoleUi() : frame_buffer() {
+  field_datatype initial_board_values[9][9] = {
+      {1, 2, 3, 4, 5, 6, 7, 8, 9},  //
+      {7, 0, 9, 1, 0, 3, 4, 5, 6},  //
+      {4, 5, 6, 7, 8, 9, 1, 2, 3},  //
+      {3, 1, 0, 8, 4, 5, 9, 6, 7},  //
+      {6, 0, 7, 3, 0, 2, 8, 4, 5},  //
+      {8, 4, 5, 6, 9, 0, 0, 0, 2},  //
+      {0, 0, 0, 5, 7, 4, 6, 9, 8},  //
+      {9, 0, 0, 2, 3, 1, 5, 0, 4},  //
+      {5, 7, 4, 9, 6, 8, 2, 3, 1},  //
+  };
+  board = Board(initial_board_values);
 }
 
 void ConsoleUi::game_loop() {
@@ -113,16 +115,16 @@ void ConsoleUi::game_loop() {
     print_frame_buffer();
 
     print_message(message);
+    message = "";
 
     auto input = get_input();
 
     auto command = parse_input(input);
 
     if (command->is_valid()) {
-      command->apply_to_board(board);
-    } else {
-      message = command->get_message();
+      command->apply_to_board(this);
     }
+    message = command->get_message();
   } while (1);
 }
 
@@ -179,6 +181,17 @@ string ConsoleUi::get_input() {
 
 unique_ptr<SudokuCommand> ConsoleUi::parse_input(string input) {
   return unique_ptr<SudokuCommand>(new SudokuCommand(input));
+}
+
+void ConsoleUi::set_value_of_field(board_index_datatype row,
+                                   board_index_datatype column,
+                                   field_datatype value) {
+  board.set_value_of_field(row, column, value);
+}
+
+void ConsoleUi::solve() {
+  Solver solver;
+  board = solver.solve(board);
 }
 
 }  // namespace Sudoku
